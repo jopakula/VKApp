@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "VKApp"
 include(":app")
+include(":uikit")
+include(":data")
+include(":domain")
