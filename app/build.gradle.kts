@@ -51,6 +51,9 @@ android {
 
 dependencies {
 
+    // navigation
+    implementation(libs.androidx.navigation.compose)
+
     // modules
     implementation(project(":uikit"))
     implementation(project(":data"))
