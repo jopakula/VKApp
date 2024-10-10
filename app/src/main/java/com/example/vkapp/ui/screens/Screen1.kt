@@ -3,14 +3,13 @@ package com.example.vkapp.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.uikit.button.MyButton
 import com.example.vkapp.navigation.Screens
 
 
@@ -24,11 +23,11 @@ fun Screen1(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Button(onClick = {
+        MyButton(
+            buttonText = "to screen 2",
+            onClick = {
             navigationController.navigate(Screens.Screen2.screen)
-        }) {
-            Text(text = "ToScreen2")
-        }
+        })
     }
 }
 
