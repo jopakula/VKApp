@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.uikit.button.MyButton
+import com.example.uikit.pictures.MyIcon
 import com.example.vkapp.navigation.Screens
 
 
@@ -23,6 +24,7 @@ fun Screen1(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        MyIcon()
         MyButton(
             buttonText = "to screen 2",
             onClick = {

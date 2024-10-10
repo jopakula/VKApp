@@ -10,4 +10,5 @@ import androidx.compose.ui.graphics.Color
 val White = Color(0xFFFFFFFF)
 val ButtonEnableBG = Color(0xFF2688EB)
 val ButtonUnEnableBG = Color(0xFF7CB3F3)
+val IconBG = Color(0xFF859AB3)
 
