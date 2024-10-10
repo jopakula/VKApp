@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.uikit.R
-import com.example.uikit.common.IconBG
 
 /**
  * Компонент для отображения иконки
