@@ -27,6 +27,12 @@ fun Screen2(
             onClick = {
             navigationController.navigate(Screens.Screen1.screen)
         })
+        MyButton(
+            buttonText = " To authentication screen",
+            onClick = {
+                navigationController.navigate(Screens.Authentication.screen)
+            }
+        )
     }
 }
 @Composable

@@ -51,6 +51,17 @@ android {
 
 dependencies {
 
+    // View Model
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // coroutines
+    implementation(libs.jetbrains.kotlinx.coroutines.core)
+    implementation(libs.jetbrains.kotlinx.coroutines.android)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
     // navigation
     implementation(libs.androidx.navigation.compose)
 
