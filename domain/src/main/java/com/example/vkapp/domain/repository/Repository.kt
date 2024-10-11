@@ -5,4 +5,8 @@ import com.example.vkapp.domain.models.DomainUserModel
 
 interface Repository {
     suspend fun authenticateUser(authenticationRequest: DomainAuthenticationRequestModel): DomainUserModel
+
+    suspend fun saveUser(user: DomainUserModel)
+
+    suspend fun getUser(): DomainUserModel
 }

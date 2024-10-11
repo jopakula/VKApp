@@ -7,6 +7,10 @@ import org.koin.dsl.module
 val appModule = module {
 
     viewModel {
-        AuthenticationScreenViewModel(authenticateUserUseCase = get())
+        AuthenticationScreenViewModel(
+            authenticateUserUseCase = get(),
+            saveUserUseCase = get(),
+            getUserUseCase = get(),
+        )
     }
 }

@@ -18,6 +18,17 @@ class UserMapperData {
                 image = user.image,
             )
         }
+        fun mapDomainUserToData(user: DomainUserModel): DataUserModel{
+            return DataUserModel(
+                id = user.id,
+                username = user.username,
+                email = user.email,
+                firstName = user.firstName,
+                lastName = user.lastName,
+                gender = user.gender,
+                image = user.image,
+            )
+        }
         fun mapDomainAuthenticationRequestToData(request: DomainAuthenticationRequestModel): DataAuthenticationRequestModel{
             return DataAuthenticationRequestModel(
                 username = request.username,
