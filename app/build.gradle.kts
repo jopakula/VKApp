@@ -51,7 +51,10 @@ android {
 
 dependencies {
 
-    // View Model
+    // livedata
+    implementation(libs.androidx.runtime.livedata)
+
+    // view Model
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // coroutines

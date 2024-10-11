@@ -1,9 +1,8 @@
 package com.example.vkapp.ui.viewModels
 
 import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vkapp.network.HttpClient
@@ -13,14 +12,20 @@ import kotlinx.coroutines.launch
 
 class AuthenticationScreenViewModel : ViewModel() {
 
-    var username by mutableStateOf("")
-        private set
-    var email by mutableStateOf("")
-        private set
-    var iconUrl by mutableStateOf<String?>(null)
-        private set
-    var errorMessage by mutableStateOf<String?>(null)
-        private set
+    var login = MutableLiveData<String>("")
+    var password = MutableLiveData<String>("")
+
+    private var _usernameMutable = MutableLiveData<String>("")
+    var username: LiveData<String> = _usernameMutable
+
+    private var _emailMutable = MutableLiveData<String>("")
+    var email: LiveData<String> = _emailMutable
+
+    private var _iconUrlMutable = MutableLiveData<String?>(null)
+    var iconUrl: LiveData<String?> = _iconUrlMutable
+
+    private var _errorMessageMutable = MutableLiveData<String?>()
+    var errorMessage: LiveData<String?> = _errorMessageMutable
 
     fun authenticate(login: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -32,12 +37,12 @@ class AuthenticationScreenViewModel : ViewModel() {
                     )
                 )
                 if (user != null) {
-                    username = user.username
-                    email = user.email
-                    iconUrl = user.image
+                    _usernameMutable.postValue(user.username)
+                    _emailMutable.postValue(user.email)
+                    _iconUrlMutable.postValue(user.image)
                 }
             } catch (e: Exception) {
-                errorMessage = e.message
+                _errorMessageMutable.postValue(e.message)
                 Log.e("AuthError", e.toString())
             }
         }

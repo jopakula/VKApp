@@ -5,26 +5,29 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.uikit.button.MyButton
 import com.example.uikit.inputField.MyInputField
 import com.example.uikit.pictures.MyIcon
 import com.example.uikit.text.MyText
 import com.example.vkapp.ui.viewModels.AuthenticationScreenViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun AuthenticationScreen(
     viewModel: AuthenticationScreenViewModel = viewModel()
 ) {
-    var login by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+
+    val username by viewModel.username.observeAsState("")
+    val email by viewModel.email.observeAsState("")
+    val iconUrl by viewModel.iconUrl.observeAsState(null)
+    val errorMessage by viewModel.errorMessage.observeAsState(null)
+    val login by viewModel.login.observeAsState("")
+    val password by viewModel.password.observeAsState("")
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -34,11 +37,11 @@ fun AuthenticationScreen(
 
         MyInputField(
             text = login,
-            onValueChange = { login = it }
+            onValueChange = { viewModel.login.value = it }
         )
         MyInputField(
             text = password,
-            onValueChange = { password = it }
+            onValueChange = { viewModel.password.value = it }
         )
         MyButton(
             buttonText = "Войти",
@@ -47,10 +50,10 @@ fun AuthenticationScreen(
             }
         )
 
-        MyIcon(iconUrl = viewModel.iconUrl)
-        MyText(text = viewModel.username)
-        MyText(text = viewModel.email)
-        viewModel.errorMessage?.let { error ->
+        MyIcon(iconUrl = iconUrl)
+        MyText(text = username)
+        MyText(text = email)
+        errorMessage?.let { error ->
             MyText(text = "Ошибка: $error", textColor = Color.Red)
         }
     }
