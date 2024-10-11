@@ -34,6 +34,13 @@ android {
 
 dependencies {
 
+    // koin
+    implementation(libs.koin.core)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
     // modules
     implementation(project(":domain"))
 

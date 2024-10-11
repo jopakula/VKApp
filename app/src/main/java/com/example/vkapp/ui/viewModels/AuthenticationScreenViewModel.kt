@@ -1,49 +1,49 @@
 package com.example.vkapp.ui.viewModels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vkapp.network.HttpClient
-import com.example.vkapp.network.models.AuthenticationRequest
+import com.example.vkapp.domain.usecases.AuthenticateUserUseCase
+import com.example.vkapp.mappers.UserMapperPresentation
+import com.example.vkapp.network.models.AuthenticationRequestModelPresentation
+import com.example.vkapp.network.models.UserModelPresentation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AuthenticationScreenViewModel : ViewModel() {
+class AuthenticationScreenViewModel(
+    private val authenticateUserUseCase: AuthenticateUserUseCase
+) : ViewModel() {
 
-    var login = MutableLiveData<String>("")
-    var password = MutableLiveData<String>("")
+    var login = MutableLiveData("")
+    var password = MutableLiveData("")
 
-    private var _usernameMutable = MutableLiveData<String>("")
-    var username: LiveData<String> = _usernameMutable
+    private val _loading = MutableLiveData(false)
+    val loading: LiveData<Boolean> = _loading
 
-    private var _emailMutable = MutableLiveData<String>("")
-    var email: LiveData<String> = _emailMutable
+    private val _user = MutableLiveData<UserModelPresentation>()
+    val user: LiveData<UserModelPresentation> = _user
 
-    private var _iconUrlMutable = MutableLiveData<String?>(null)
-    var iconUrl: LiveData<String?> = _iconUrlMutable
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> = _errorMessage
 
-    private var _errorMessageMutable = MutableLiveData<String?>()
-    var errorMessage: LiveData<String?> = _errorMessageMutable
-
-    fun authenticate(login: String, password: String) {
+    fun authenticate() {
+        val request = AuthenticationRequestModelPresentation(
+            username = login.value.orEmpty(),
+            password = password.value.orEmpty()
+        )
         viewModelScope.launch(Dispatchers.IO) {
+            _loading.postValue(true)
             try {
-                val user = HttpClient.api?.authentication(
-                    AuthenticationRequest(
-                        username = login,
-                        password = password
-                    )
-                )
-                if (user != null) {
-                    _usernameMutable.postValue(user.username)
-                    _emailMutable.postValue(user.email)
-                    _iconUrlMutable.postValue(user.image)
-                }
+                val domainRequest = UserMapperPresentation.mapPresentationAuthenticationRequestToDomain(request)
+                val domainUser = authenticateUserUseCase.execute(authenticationRequest = domainRequest)
+                val presentationUser = UserMapperPresentation.mapDomainUserToPresentation(user = domainUser)
+
+                _user.postValue(presentationUser)
             } catch (e: Exception) {
-                _errorMessageMutable.postValue(e.message)
-                Log.e("AuthError", e.toString())
+                _errorMessage.postValue(e.message)
+            } finally {
+                _loading.postValue(false)
             }
         }
     }

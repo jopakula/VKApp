@@ -51,6 +51,10 @@ android {
 
 dependencies {
 
+    // koin
+    implementation(libs.koin.core)
+    implementation(libs.koin.androidx.compose)
+
     // livedata
     implementation(libs.androidx.runtime.livedata)
 

@@ -49,7 +49,7 @@ import com.example.uikit.text.MyText
 fun MyInputField(
     modifier: Modifier = Modifier,
     text: String? = null,
-    textSize: TextUnit = 19.sp,
+    textSize: TextUnit = 20.sp,
     textColor: Color = Black,
     fontWeight: FontWeight = FontWeight.Normal,
     fontStyle: FontStyle = FontStyle.Normal,

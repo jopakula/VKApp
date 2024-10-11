@@ -19,11 +19,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.uikit.common.Black
 import com.example.uikit.common.ButtonEnableBG
 import com.example.uikit.common.ButtonEnterText
 import com.example.uikit.common.White
+import com.example.uikit.text.MyText
 
 /**
  * Компонент для отображения кнопки
@@ -33,10 +36,13 @@ import com.example.uikit.common.White
 @Composable
 fun MyButton(
     modifier: Modifier = Modifier,
-    buttonHeight: Dp = 36.dp,
+    buttonHeight: Dp = 56.dp,
     buttonBGColor: Color = ButtonEnableBG,
     buttonText: String = ButtonEnterText,
-    roundingSize: Dp = 4.dp,
+    roundingSize: Dp = 16.dp,
+    textSize: TextUnit = 20.sp,
+    textColor: Color = Black,
+    textWeight: FontWeight = FontWeight.Normal,
     onClick: () -> Unit = {},
 ) {
 
@@ -58,11 +64,12 @@ fun MyButton(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
     ) {
-        Text(
+        MyText(
             text = buttonText,
-            color = White,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Normal)
+            textColor = textColor,
+            textSize = textSize,
+            textWeight = textWeight
+        )
     }
 }
 

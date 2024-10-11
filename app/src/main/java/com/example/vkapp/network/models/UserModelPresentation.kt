@@ -1,6 +1,6 @@
 package com.example.vkapp.network.models
 
-data class User(
+data class UserModelPresentation(
     val id: Int,
     val username: String,
     val email: String,
