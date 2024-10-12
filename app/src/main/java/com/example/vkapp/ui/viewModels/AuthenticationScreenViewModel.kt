@@ -42,8 +42,6 @@ class AuthenticationScreenViewModel(
                 val domainRequest = UserMapperPresentation.mapPresentationAuthenticationRequestToDomain(request)
                 val domainUser = authenticateUserUseCase.execute(authenticationRequest = domainRequest)
                 saveUserUseCase.execute(domainUser)
-//                val presentationUser = UserMapperPresentation.mapDomainUserToPresentation(domainUser)
-//                _user.postValue(presentationUser)
             } catch (e: Exception) {
                 _errorMessage.postValue(e.message)
             } finally {
@@ -54,15 +52,12 @@ class AuthenticationScreenViewModel(
 
     fun getUser() {
         viewModelScope.launch(Dispatchers.IO) {
-            _loading.postValue(true)
             try {
                 val domainUser = getUserUseCase.execute()
                 val presentationUser = UserMapperPresentation.mapDomainUserToPresentation(domainUser)
                 _user.postValue(presentationUser)
             } catch (e: Exception) {
                 _errorMessage.postValue(e.message)
-            } finally {
-                _loading.postValue(false)
             }
         }
     }
