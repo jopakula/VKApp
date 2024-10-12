@@ -14,20 +14,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.uikit.common.White
 import com.example.uikit.pictures.MyIcon
+import com.example.vkapp.navigation.Screens
 import com.example.vkapp.ui.viewModels.MainScreenViewModel
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MainScreen(
-    viewModel: MainScreenViewModel = koinViewModel()
+    viewModel: MainScreenViewModel = koinViewModel(),
+    navigationController: NavController,
 ){
 
     val user by viewModel.user.observeAsState()
 
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         delay(1000)
         viewModel.getUser()
     }
@@ -50,7 +54,10 @@ fun MainScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 MyIcon(
-                    iconUrl = user?.image
+                    iconUrl = user?.image,
+                    onClick = {
+                        navigationController.navigate(Screens.Profile.screen)
+                    }
                 )
 //                MyButton(
 //                    buttonText = "Загрузить",
@@ -66,5 +73,5 @@ fun MainScreen(
 @Composable
 @Preview
 private fun MainScreenPreview(){
-    MainScreen()
+    MainScreen(navigationController = rememberNavController())
 }

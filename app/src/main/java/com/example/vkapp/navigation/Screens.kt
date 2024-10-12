@@ -7,4 +7,5 @@ sealed class Screens (
     data object Screen2: Screens("screen2")
     data object Authentication: Screens("authentication")
     data object Main: Screens("main")
+    data object Profile: Screens("profile")
 }

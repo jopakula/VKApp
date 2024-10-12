@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.vkapp.ui.screens.AuthenticationScreen
 import com.example.vkapp.ui.screens.MainScreen
+import com.example.vkapp.ui.screens.ProfileScreen
 import com.example.vkapp.ui.screens.Screen1
 import com.example.vkapp.ui.screens.Screen2
 
@@ -24,6 +25,7 @@ fun Navigation(
         composable(Screens.Screen1.screen) { Screen1(navigationController = navigationController)}
         composable(Screens.Screen2.screen) { Screen2(navigationController = navigationController)}
         composable(Screens.Authentication.screen) { AuthenticationScreen(navigationController = navigationController)}
-        composable(Screens.Main.screen) { MainScreen()}
+        composable(Screens.Main.screen) { MainScreen(navigationController = navigationController)}
+        composable(Screens.Profile.screen) { ProfileScreen()}
     }
 }
