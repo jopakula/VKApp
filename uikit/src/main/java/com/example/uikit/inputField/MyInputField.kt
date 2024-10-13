@@ -1,6 +1,7 @@
 package com.example.uikit.inputField
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -63,20 +64,31 @@ fun MyInputField(
     iconColor: Color = Gray,
     innerPadding: PaddingValues = PaddingValues(vertical = 6.dp, horizontal = 8.dp),
     roundingSize: Dp = 16.dp,
-    onValueChange: (String) -> Unit = {},
     maxLines: Int = 1,
     isSingleLine: Boolean = true,
     hint: String? = null,
     textPadding: PaddingValues = PaddingValues(start = 8.dp, end = 8.dp),
     hintColor: Color = Gray,
+    borderWidth: Dp? = null,
+    borderColor: Color = Gray,
+    onValueChange: (String) -> Unit = {},
 ) {
     val focusRequester = remember { FocusRequester() }
     val interactionSource = remember { MutableInteractionSource() }
     val focusManager = LocalFocusManager.current
-
+    val borderModifier = if (borderWidth != null) {
+        Modifier.border(
+            width = borderWidth,
+            color = borderColor,
+            shape = RoundedCornerShape(roundingSize)
+        )
+    } else {
+        Modifier
+    }
     Row(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .then(borderModifier),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Row(

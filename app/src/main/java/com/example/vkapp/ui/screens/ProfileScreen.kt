@@ -1,17 +1,23 @@
 package com.example.vkapp.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.uikit.common.White
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.uikit.common.Gray
 import com.example.uikit.pictures.MyIcon
 import com.example.uikit.text.MyText
 import com.example.vkapp.ui.viewModels.ProfileScreenViewModel
@@ -19,36 +25,88 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ProfileScreen(
-    viewModel: ProfileScreenViewModel = koinViewModel()
+    viewModel: ProfileScreenViewModel = koinViewModel(),
+    onIconBackClick: () -> Unit = {},
 ) {
 
     val user by viewModel.user.observeAsState()
 
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         viewModel.getUser()
     }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = White),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start,
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(34.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 24.dp),
+        ) {
+            MyIcon(
+                icon = painterResource(id = com.example.uikit.R.drawable.arrow_back),
+                borderWidth = 0.dp,
+                onClick = onIconBackClick,
+            )
+        }
 
-        MyIcon(iconUrl = user?.image)
-        MyText(text = user?.username?: "")
-        MyText(text = user?.email?: "")
-        MyText(text = user?.firstName?: "")
-        MyText(text = user?.lastName?: "")
-        MyText(text = user?.gender?: "")
+        MyIcon(
+            iconUrl = user?.image,
+            iconSize = 300.dp,
+            roundingSize = 8.dp,
+            shadowElevation = 8.dp
+        )
 
+        Row(
+            modifier = Modifier,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            MyText(
+                text = user?.firstName ?: "",
+                textSize = 44.sp,
+                textWeight = FontWeight.Bold,
+            )
+            MyText(
+                text = user?.lastName ?: "",
+                textSize = 44.sp,
+                textWeight = FontWeight.Bold,
+            )
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
+            MyText(
+                text = "Username: \n@${user?.username?: ""}",
+                textSize = 22.sp,
+                textWeight = FontWeight.Medium,
+                textColor = Gray,
+            )
+            MyText(
+                text = "Gender: \n${user?.gender ?: ""}",
+                textSize = 22.sp,
+                textWeight = FontWeight.Medium,
+                textColor = Gray,
+            )
+            MyText(
+                text = "Email: \n${user?.email ?: ""}",
+                textSize = 22.sp,
+                textWeight = FontWeight.Medium,
+                textColor = Gray,
+            )
+        }
     }
-
 }
 
 @Composable
 @Preview
-private fun ProfileScreenPreview(){
+private fun ProfileScreenPreview() {
     ProfileScreen()
 }

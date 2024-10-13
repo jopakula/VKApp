@@ -61,4 +61,8 @@ class AuthenticationScreenViewModel(
             }
         }
     }
+
+    fun clearErrorMessage(){
+        _errorMessage.postValue(null)
+    }
 }

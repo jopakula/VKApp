@@ -26,6 +26,6 @@ fun Navigation(
         composable(Screens.Screen2.screen) { Screen2(navigationController = navigationController)}
         composable(Screens.Authentication.screen) { AuthenticationScreen(navigationController = navigationController)}
         composable(Screens.Main.screen) { MainScreen(navigationController = navigationController)}
-        composable(Screens.Profile.screen) { ProfileScreen()}
+        composable(Screens.Profile.screen) { ProfileScreen(onIconBackClick = { navigationController.popBackStack() })}
     }
 }

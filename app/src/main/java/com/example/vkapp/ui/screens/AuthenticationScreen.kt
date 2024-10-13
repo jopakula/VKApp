@@ -32,13 +32,12 @@ fun AuthenticationScreen(
     val password by viewModel.password.observeAsState("")
     val loading by viewModel.loading.observeAsState(false)
 
-    LaunchedEffect(user) {
-        if (user != null) {
+    LaunchedEffect(user, errorMessage) {
+        if (user != null && errorMessage == null) {
             delay(1000)
             navigationController.navigate(Screens.Main.screen)
         }
     }
-
 
     Column(
         modifier = Modifier
@@ -47,39 +46,33 @@ fun AuthenticationScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        MyInputField(
-            modifier = Modifier
-                .padding(bottom = 10.dp),
-            text = login,
-            onValueChange = { viewModel.login.value = it },
-            showIconSearch = false,
-            hint = "Введите логин"
-        )
-        MyInputField(
-            modifier = Modifier
-                .padding(bottom = 10.dp),
-            text = password,
-            onValueChange = { viewModel.password.value = it },
-            showIconSearch = false,
-            hint = "Введите пароль"
-        )
-        MyButton(
-            buttonText = if (loading) "Загрузка..." else "Войти",
-            onClick = {
-                viewModel.authenticate()
-                viewModel.getUser()
-            }
-        )
-
-//        user?.let {
-//            MyIcon(iconUrl = it.image)
-//            MyText(text = it.username)
-//            MyText(text = it.email)
-//        }
-//
-//        errorMessage?.let {
-//            MyText(text = "Ошибка: $it", textColor = Color.Red)
-//        }
+        Column(
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            MyInputField(
+                text = login,
+                onValueChange = { viewModel.login.value = it },
+                showIconSearch = false,
+                hint = "Введите логин",
+                borderWidth = 0.dp
+            )
+            MyInputField(
+                text = password,
+                onValueChange = { viewModel.password.value = it },
+                showIconSearch = false,
+                hint = "Введите пароль",
+                borderWidth = 0.dp
+            )
+            MyButton(
+                buttonText = if (loading) "Загрузка..." else "Войти",
+                onClick = {
+                    viewModel.clearErrorMessage()
+                    viewModel.authenticate()
+                    viewModel.getUser()
+                }
+            )
+        }
     }
 }
 
