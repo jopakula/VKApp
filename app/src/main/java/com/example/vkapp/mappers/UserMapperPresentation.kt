@@ -2,13 +2,13 @@ package com.example.vkapp.mappers
 
 import com.example.vkapp.domain.models.DomainAuthenticationRequestModel
 import com.example.vkapp.domain.models.DomainUserModel
-import com.example.vkapp.network.models.AuthenticationRequestModelPresentation
-import com.example.vkapp.network.models.UserModelPresentation
+import com.example.uikit.models.AuthenticationRequestModel
+import com.example.uikit.models.UserModel
 
 class UserMapperPresentation {
     companion object{
-        fun mapDomainUserToPresentation(user: DomainUserModel): UserModelPresentation {
-            return UserModelPresentation(
+        fun mapDomainUserToPresentation(user: DomainUserModel): UserModel {
+            return UserModel(
                 id = user.id,
                 username = user.username,
                 email = user.email,
@@ -18,7 +18,7 @@ class UserMapperPresentation {
                 image = user.image,
             )
         }
-        fun mapPresentationAuthenticationRequestToDomain(request: AuthenticationRequestModelPresentation): DomainAuthenticationRequestModel {
+        fun mapPresentationAuthenticationRequestToDomain(request: AuthenticationRequestModel): DomainAuthenticationRequestModel {
             return DomainAuthenticationRequestModel(
                 username = request.username,
                 password = request.password,

@@ -8,8 +8,8 @@ import com.example.vkapp.domain.usecases.AuthenticateUserUseCase
 import com.example.vkapp.domain.usecases.GetUserUseCase
 import com.example.vkapp.domain.usecases.SaveUserUseCase
 import com.example.vkapp.mappers.UserMapperPresentation
-import com.example.vkapp.network.models.AuthenticationRequestModelPresentation
-import com.example.vkapp.network.models.UserModelPresentation
+import com.example.uikit.models.AuthenticationRequestModel
+import com.example.uikit.models.UserModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -25,14 +25,14 @@ class AuthenticationScreenViewModel(
     private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loading
 
-    private val _user = MutableLiveData<UserModelPresentation?>()
-    val user: LiveData<UserModelPresentation?> = _user
+    private val _user = MutableLiveData<UserModel?>()
+    val user: LiveData<UserModel?> = _user
 
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
     fun authenticate() {
-        val request = AuthenticationRequestModelPresentation(
+        val request = AuthenticationRequestModel(
             username = login.value.orEmpty(),
             password = password.value.orEmpty()
         )

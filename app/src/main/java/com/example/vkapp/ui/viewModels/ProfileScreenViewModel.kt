@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vkapp.domain.usecases.GetUserUseCase
 import com.example.vkapp.mappers.UserMapperPresentation
-import com.example.vkapp.network.models.UserModelPresentation
+import com.example.uikit.models.UserModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -14,8 +14,8 @@ class ProfileScreenViewModel(
     private val getUserUseCase: GetUserUseCase
 ) : ViewModel() {
 
-    private val _user = MutableLiveData<UserModelPresentation?>()
-    val user: LiveData<UserModelPresentation?> = _user
+    private val _user = MutableLiveData<UserModel?>()
+    val user: LiveData<UserModel?> = _user
 
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage

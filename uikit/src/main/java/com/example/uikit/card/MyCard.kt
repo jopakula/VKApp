@@ -17,12 +17,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.uikit.common.ButtonUnEnableBG
+import com.example.uikit.models.PostModel
+import com.example.uikit.models.ReactionsModel
 import com.example.uikit.text.MyText
 
 @Composable
 fun MyCard(
     modifier: Modifier = Modifier,
     roundingSize: Dp = 16.dp,
+    post: PostModel,
     onClick: () -> Unit = {},
 ){
     val interactionSource = remember { MutableInteractionSource() }
@@ -43,14 +46,15 @@ fun MyCard(
         verticalArrangement = Arrangement.spacedBy(6.dp)
 
     ) {
-        MyText()
-        MyText()
-        MyText()
+        MyText(text = post.title)
+        MyText(text = post.body)
+        MyText(text = post.reactions.likes.toString())
     }
 }
 
 @Composable
 @Preview
 private fun MyCardPreview(){
-    MyCard()
+    val post = PostModel(id = 1, title = "title", body = "body", tags = listOf("tags1", "tags2"), reactions = ReactionsModel(1, 2), views = 1, userId = 1)
+    MyCard(post = post)
 }

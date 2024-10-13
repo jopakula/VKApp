@@ -1,6 +1,6 @@
-package com.example.vkapp.network.models
+package com.example.uikit.models
 
-data class UserModelPresentation(
+data class UserModel(
     val id: Int,
     val username: String,
     val email: String,
