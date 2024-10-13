@@ -8,4 +8,7 @@ sealed class Screens (
     data object Authentication: Screens("authentication")
     data object Main: Screens("main")
     data object Profile: Screens("profile")
+    data object Detail: Screens("detail/{postId}"){
+        fun createRoute(postId: Int) = "detail/$postId"
+    }
 }
