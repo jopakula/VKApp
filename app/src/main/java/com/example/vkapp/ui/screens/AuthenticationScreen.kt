@@ -30,6 +30,7 @@ fun AuthenticationScreen(
     val errorMessage by viewModel.errorMessage.observeAsState(null)
     val login by viewModel.login.observeAsState("")
     val password by viewModel.password.observeAsState("")
+    val isButtonEnabled = login.isNotBlank() && password.isNotBlank()
     val loading by viewModel.loading.observeAsState(false)
 
     LaunchedEffect(user, errorMessage) {
@@ -66,6 +67,7 @@ fun AuthenticationScreen(
             )
             MyButton(
                 buttonText = if (loading) "Загрузка..." else "Войти",
+                enabled = isButtonEnabled,
                 onClick = {
                     viewModel.clearErrorMessage()
                     viewModel.authenticate()

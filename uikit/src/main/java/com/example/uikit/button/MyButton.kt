@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -43,6 +44,7 @@ fun MyButton(
     textSize: TextUnit = 20.sp,
     textColor: Color = Black,
     textWeight: FontWeight = FontWeight.Normal,
+    enabled: Boolean = true,
     onClick: () -> Unit = {},
 ) {
 
@@ -55,8 +57,12 @@ fun MyButton(
             .clickable(
                 interactionSource = interactionSource,
                 indication = rememberRipple(),
+                enabled = enabled,
                 onClick = onClick,
             )
+            .graphicsLayer {
+                alpha = if (enabled) 1f else 0.5f
+            }
             .background(
                 color = buttonBGColor,
                 shape = RoundedCornerShape(roundingSize)

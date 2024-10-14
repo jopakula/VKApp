@@ -1,5 +1,6 @@
 package com.example.vkapp.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.uikit.common.Gray
+import com.example.uikit.common.IconBG
+import com.example.uikit.common.LightGray
+import com.example.uikit.common.White
 import com.example.uikit.pictures.MyIcon
 import com.example.uikit.text.MyText
 import com.example.vkapp.ui.viewModels.ProfileScreenViewModel
@@ -37,19 +41,20 @@ fun ProfileScreen(
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(34.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 24.dp),
+                .background(IconBG)
+                .padding(start = 20.dp, top = 32.dp, end = 20.dp, bottom = 16.dp),
         ) {
             MyIcon(
                 icon = painterResource(id = com.example.uikit.R.drawable.arrow_back),
                 borderWidth = 0.dp,
+                iconColorBG = White,
                 onClick = onIconBackClick,
             )
         }
@@ -58,7 +63,8 @@ fun ProfileScreen(
             iconUrl = user?.image,
             iconSize = 300.dp,
             roundingSize = 8.dp,
-            shadowElevation = 8.dp
+            shadowElevation = 8.dp,
+            clickable = false,
         )
 
         Row(
@@ -79,7 +85,8 @@ fun ProfileScreen(
         }
         Column(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(16.dp),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {

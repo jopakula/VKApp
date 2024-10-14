@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -45,11 +46,13 @@ fun MyIcon(
     iconSize: Dp = 50.dp,
     roundingSize: Dp? = null,
     iconColor: Color? = null,
+    iconColorBG: Color? = null,
     borderWidth: Dp? = null,
     borderColor: Color = Gray,
     shadowElevation: Dp = 0.dp,
     contentScale: ContentScale = ContentScale.Crop,
-    indication: Indication? = LocalIndication.current,
+    indication: Indication? = rememberRipple(),
+    clickable: Boolean = true,
     onClick: () -> Unit = {},
 ) {
     val rounding = roundingSize ?: iconSize
@@ -63,6 +66,15 @@ fun MyIcon(
     } else {
         Modifier
     }
+    val clickModifier = if (clickable) {
+        Modifier.clickable(
+            interactionSource = interactionSource,
+            indication = indication,
+            onClick = onClick
+        )
+    } else {
+        Modifier
+    }
     Box(
         modifier = modifier
             .shadow(
@@ -72,14 +84,10 @@ fun MyIcon(
             .size(iconSize)
             .clip(RoundedCornerShape(rounding))
             .background(
-                color = Color.Transparent,
+                color = iconColorBG?: Color.Transparent,
                 shape = RoundedCornerShape(rounding)
             )
-            .clickable(
-                interactionSource = interactionSource,
-                indication = indication,
-                onClick = onClick
-            )
+            .then(clickModifier)
             .then(borderModifier),
         contentAlignment = Alignment.Center
     ) {

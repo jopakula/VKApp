@@ -5,20 +5,28 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.uikit.common.ButtonUnEnableBG
+import androidx.compose.ui.unit.sp
+import com.example.uikit.R
+import com.example.uikit.common.CardBG
 import com.example.uikit.models.PostModel
 import com.example.uikit.models.ReactionsModel
+import com.example.uikit.pictures.MyIcon
 import com.example.uikit.text.MyText
 
 @Composable
@@ -27,11 +35,17 @@ fun MyCard(
     roundingSize: Dp = 16.dp,
     post: PostModel,
     onClick: () -> Unit = {},
+    onIconClick: () -> Unit = {},
+    shadowElevation: Dp = 0.dp,
 ){
     val interactionSource = remember { MutableInteractionSource() }
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .shadow(
+                elevation = shadowElevation,
+                shape = RoundedCornerShape(roundingSize)
+            )
             .clip(RoundedCornerShape(roundingSize))
             .clickable(
                 interactionSource = interactionSource,
@@ -39,16 +53,37 @@ fun MyCard(
                 onClick = onClick,
             )
             .background(
-                color = ButtonUnEnableBG,
+                color = CardBG,
                 shape = RoundedCornerShape(roundingSize)
             )
             .padding(10.dp),
-        verticalArrangement = Arrangement.spacedBy(6.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
 
     ) {
-        MyText(text = post.title)
-        MyText(text = post.body)
-        MyText(text = post.reactions.likes.toString())
+        MyText(
+            text = post.title,
+            textSize = 20.sp,
+            textWeight = FontWeight.Bold
+        )
+        MyText(
+            text = post.body,
+            textSize = 18.sp,
+            textWeight = FontWeight.SemiBold
+            )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            MyText(
+                text = post.reactions.likes.toString(),
+                textSize = 20.sp
+            )
+            MyIcon(
+                icon = painterResource(id = R.drawable.heart),
+                iconSize = 22.dp,
+                onClick = onIconClick,
+            )
+        }
     }
 }
 
