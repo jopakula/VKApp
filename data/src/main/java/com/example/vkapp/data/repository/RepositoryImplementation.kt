@@ -31,7 +31,12 @@ class RepositoryImplementation(
     }
 
     override suspend fun getPosts(): DomainPostsResponse {
-        val postsData = networkStorage.getPosts()
-        return PostMapperData.mapDataPostResponseToDomain(postsData)
+        val postResponse = networkStorage.getPosts()
+        return PostMapperData.mapDataPostResponseToDomain(posts = postResponse)
+    }
+
+    override suspend fun getPostById(postId: Int): DomainPostModel {
+        val postData = networkStorage.getPostById(postId = postId)
+        return PostMapperData.mapDataPostToDomain(post = postData)
     }
 }

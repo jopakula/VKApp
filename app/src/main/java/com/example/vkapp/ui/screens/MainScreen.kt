@@ -76,10 +76,13 @@ fun MainScreen(
             horizontalAlignment = Alignment.Start,
         ) {
             items(posts) { post ->
-                MyCard(post = post)
+                MyCard(
+                    post = post,
+                    onClick = {
+                        navigationController.navigate(Screens.Detail.createRoute(postId = post.id))
+                    })
             }
         }
-
     }
 }
 

@@ -1,6 +1,7 @@
 package com.example.vkapp.di
 
 import com.example.vkapp.ui.viewModels.AuthenticationScreenViewModel
+import com.example.vkapp.ui.viewModels.DetailScreenViewModel
 import com.example.vkapp.ui.viewModels.MainScreenViewModel
 import com.example.vkapp.ui.viewModels.ProfileScreenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -24,6 +25,11 @@ val appModule = module {
     viewModel{
         ProfileScreenViewModel(
             getUserUseCase = get()
+        )
+    }
+    viewModel {
+        DetailScreenViewModel(
+            getPostByIdUseCase = get()
         )
     }
 }

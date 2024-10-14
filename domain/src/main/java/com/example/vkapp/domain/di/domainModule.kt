@@ -1,6 +1,7 @@
 package com.example.vkapp.domain.di
 
 import com.example.vkapp.domain.usecases.AuthenticateUserUseCase
+import com.example.vkapp.domain.usecases.GetPostByIdUseCase
 import com.example.vkapp.domain.usecases.GetPostsUseCase
 import com.example.vkapp.domain.usecases.GetUserUseCase
 import com.example.vkapp.domain.usecases.SaveUserUseCase
@@ -18,5 +19,8 @@ val domainModule = module {
     }
     factory<GetPostsUseCase> {
         GetPostsUseCase(repository = get())
+    }
+    factory<GetPostByIdUseCase> {
+        GetPostByIdUseCase(repository = get())
     }
 }
