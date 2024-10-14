@@ -19,17 +19,18 @@ val appModule = module {
     viewModel{
         MainScreenViewModel(
             getUserUseCase = get(),
-            getPostsUseCase = get()
+            getPostsUseCase = get(),
         )
     }
     viewModel{
         ProfileScreenViewModel(
-            getUserUseCase = get()
+            getUserUseCase = get(),
         )
     }
     viewModel {
         DetailScreenViewModel(
-            getPostByIdUseCase = get()
+            getPostByIdUseCase = get(),
+            updatePostUseCase = get()
         )
     }
 }

@@ -5,6 +5,6 @@ import com.example.vkapp.domain.repository.Repository
 
 class SaveUserUseCase(private val repository: Repository) {
     suspend fun execute(user: DomainUserModel){
-        return repository.saveUser(user)
+        return repository.saveUser(user = user)
     }
 }

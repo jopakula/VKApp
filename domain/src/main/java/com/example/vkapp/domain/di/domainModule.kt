@@ -5,6 +5,7 @@ import com.example.vkapp.domain.usecases.GetPostByIdUseCase
 import com.example.vkapp.domain.usecases.GetPostsUseCase
 import com.example.vkapp.domain.usecases.GetUserUseCase
 import com.example.vkapp.domain.usecases.SaveUserUseCase
+import com.example.vkapp.domain.usecases.UpdatePostUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -22,5 +23,8 @@ val domainModule = module {
     }
     factory<GetPostByIdUseCase> {
         GetPostByIdUseCase(repository = get())
+    }
+    factory<UpdatePostUseCase> {
+        UpdatePostUseCase(repository = get())
     }
 }

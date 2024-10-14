@@ -46,12 +46,11 @@ class MainScreenViewModel(
 
     fun getPosts() {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.wtf("AAA", "pressed")
             try {
                 val domainPostsList = getPostsUseCase.execute()
                 val presentationPostsList = PostMapperPresentation.mapDomainPostResponseToPresentation(posts = domainPostsList)
                 _posts.postValue(presentationPostsList)
-                Log.wtf("AAA", "$posts")
+                Log.wtf("AAA", "${posts.value}")
             } catch (e: Exception) {
                 _errorMessage.postValue(e.message)
                 Log.wtf("AAA", "${e.message}")

@@ -34,10 +34,9 @@ fun MyCard(
     modifier: Modifier = Modifier,
     roundingSize: Dp = 16.dp,
     post: PostModel,
-    onClick: () -> Unit = {},
-    onIconClick: () -> Unit = {},
     shadowElevation: Dp = 0.dp,
-){
+    onClick: () -> Unit = {},
+) {
     val interactionSource = remember { MutableInteractionSource() }
     Column(
         modifier = modifier
@@ -69,27 +68,21 @@ fun MyCard(
             text = post.body,
             textSize = 18.sp,
             textWeight = FontWeight.SemiBold
-            )
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            MyText(
-                text = post.reactions.likes.toString(),
-                textSize = 20.sp
-            )
-            MyIcon(
-                icon = painterResource(id = R.drawable.heart),
-                iconSize = 22.dp,
-                onClick = onIconClick,
-            )
-        }
+        )
     }
 }
 
 @Composable
 @Preview
-private fun MyCardPreview(){
-    val post = PostModel(id = 1, title = "title", body = "body", tags = listOf("tags1", "tags2"), reactions = ReactionsModel(1, 2), views = 1, userId = 1)
+private fun MyCardPreview() {
+    val post = PostModel(
+        id = 1,
+        title = "title",
+        body = "body",
+        tags = listOf("tags1", "tags2"),
+        reactions = ReactionsModel(1, 2),
+        views = 1,
+        userId = 1
+    )
     MyCard(post = post)
 }

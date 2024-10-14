@@ -1,9 +1,11 @@
 package com.example.vkapp.data.mappers
 
 import com.example.vkapp.data.storage.models.DataPostModel
+import com.example.vkapp.data.storage.models.DataReactionsRequestModel
 import com.example.vkapp.data.storage.models.DataPostsResponse
 import com.example.vkapp.data.storage.models.DataReactionsModel
 import com.example.vkapp.domain.models.DomainPostModel
+import com.example.vkapp.domain.models.DomainReactionsRequestModel
 import com.example.vkapp.domain.models.DomainPostsResponse
 import com.example.vkapp.domain.models.DomainReactionsModel
 
@@ -30,6 +32,19 @@ class PostMapperData {
             return DomainReactionsModel(
                 likes = reactions.likes,
                 dislikes = reactions.dislikes,
+            )
+        }
+
+        fun mapDomainPostReactionsToData(reactions: DomainReactionsModel): DataReactionsModel{
+            return DataReactionsModel(
+                likes = reactions.likes,
+                dislikes = reactions.dislikes,
+            )
+        }
+
+        fun mapDomainPostReactionsRequestToData(requestModel: DomainReactionsRequestModel): DataReactionsRequestModel{
+            return DataReactionsRequestModel(
+                reactions = mapDomainPostReactionsToData(reactions = requestModel.reactions)
             )
         }
     }

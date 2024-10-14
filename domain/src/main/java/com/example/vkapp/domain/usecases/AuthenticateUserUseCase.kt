@@ -6,7 +6,7 @@ import com.example.vkapp.domain.repository.Repository
 
 class AuthenticateUserUseCase(private val repository: Repository) {
     suspend fun execute(authenticationRequest: DomainAuthenticationRequestModel): DomainUserModel {
-        return repository.authenticateUser(authenticationRequest)
+        return repository.authenticateUser(authenticationRequest = authenticationRequest)
     }
 }
 
