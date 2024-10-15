@@ -3,8 +3,6 @@ package com.example.vkapp.mappers
 import com.example.uikit.models.PostModel
 import com.example.uikit.models.ReactionsModel
 import com.example.uikit.models.ReactionsRequestModel
-import com.example.vkapp.data.storage.models.DataReactionsModel
-import com.example.vkapp.data.storage.models.DataReactionsRequestModel
 import com.example.vkapp.domain.models.DomainPostModel
 import com.example.vkapp.domain.models.DomainPostsResponse
 import com.example.vkapp.domain.models.DomainReactionsModel

@@ -9,8 +9,6 @@ import com.example.vkapp.ui.screens.AuthenticationScreen
 import com.example.vkapp.ui.screens.DetailScreen
 import com.example.vkapp.ui.screens.MainScreen
 import com.example.vkapp.ui.screens.ProfileScreen
-import com.example.vkapp.ui.screens.Screen1
-import com.example.vkapp.ui.screens.Screen2
 import com.example.vkapp.ui.screens.SplashScreen
 
 @Composable
@@ -25,11 +23,9 @@ fun Navigation(
         modifier = modifier
     ) {
         composable(Screens.Splash.screen) { SplashScreen(navigationController = navigationController)}
-        composable(Screens.Screen1.screen) { Screen1(navigationController = navigationController) }
-        composable(Screens.Screen2.screen) { Screen2(navigationController = navigationController) }
         composable(Screens.Authentication.screen) { AuthenticationScreen(navigationController = navigationController) }
         composable(Screens.Main.screen) { MainScreen(navigationController = navigationController) }
-        composable(Screens.Profile.screen) { ProfileScreen(onIconBackClick = { navigationController.popBackStack() },navigationController = navigationController,) }
+        composable(Screens.Profile.screen) { ProfileScreen(onIconBackClick = { navigationController.popBackStack() },navigationController = navigationController) }
         composable(Screens.Detail.screen) { backStackEntry ->
             val postId = backStackEntry.arguments?.getString("postId")?.toInt()
             if (postId != null) {

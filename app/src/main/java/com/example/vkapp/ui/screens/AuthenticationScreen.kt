@@ -28,7 +28,6 @@ import com.example.uikit.common.Greetings
 import com.example.uikit.common.InputFieldLoginText
 import com.example.uikit.common.InputFieldPasswordText
 import com.example.uikit.common.Red
-import com.example.uikit.common.TopBarBg
 import com.example.uikit.common.White
 import com.example.uikit.inputField.MyInputField
 import com.example.uikit.pictures.MyIcon
@@ -58,7 +57,6 @@ fun AuthenticationScreen(
             }
         }
     }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -71,7 +69,7 @@ fun AuthenticationScreen(
             verticalArrangement = Arrangement.spacedBy(40.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            if (user != null){
+            if (user != null) {
                 MyIcon(
                     modifier = Modifier
                         .padding(bottom = 140.dp),
@@ -112,7 +110,7 @@ fun AuthenticationScreen(
                         text = password,
                         onValueChange = { viewModel.password.value = it },
                         showIconSearch = false,
-                        hint =  InputFieldPasswordText,
+                        hint = InputFieldPasswordText,
                         hintColor = if (errorMessage != null) Red else Gray,
                         borderColor = if (errorMessage != null) Red else Gray,
                         borderWidth = 0.dp
@@ -125,7 +123,6 @@ fun AuthenticationScreen(
                         )
                     }
                 }
-
                 MyButton(
                     buttonText = if (loading) ButtonEnterLoadingText else ButtonEnterText,
                     enabled = isButtonEnabled,

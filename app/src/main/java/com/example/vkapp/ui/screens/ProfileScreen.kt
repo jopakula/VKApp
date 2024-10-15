@@ -29,7 +29,6 @@ import com.example.uikit.common.Gray
 import com.example.uikit.common.IconBG
 import com.example.uikit.common.LightGray
 import com.example.uikit.common.Red
-import com.example.uikit.common.TopBarBg
 import com.example.uikit.common.Username
 import com.example.uikit.common.White
 import com.example.uikit.pictures.MyIcon
@@ -71,7 +70,6 @@ fun ProfileScreen(
                 onClick = onIconBackClick,
             )
         }
-
         MyIcon(
             iconUrl = user?.image,
             iconSize = 360.dp,
@@ -79,7 +77,6 @@ fun ProfileScreen(
             borderWidth = 1.dp,
             clickable = false,
         )
-
         Row(
             modifier = Modifier,
             verticalAlignment = Alignment.CenterVertically,

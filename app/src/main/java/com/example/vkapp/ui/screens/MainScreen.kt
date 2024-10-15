@@ -22,7 +22,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.uikit.card.MyCard
 import com.example.uikit.common.IconBG
-import com.example.uikit.common.LightGray
 import com.example.uikit.common.TopBarBg
 import com.example.uikit.common.White
 import com.example.uikit.pictures.MyIcon
@@ -67,7 +66,6 @@ fun MainScreen(
                 }
             )
         }
-
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize(),

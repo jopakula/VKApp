@@ -1,10 +1,6 @@
 package com.example.vkapp.ui.viewModels
 
 import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.uikit.models.PostModel
 import com.example.uikit.models.ReactionsModel
 import com.example.uikit.models.ReactionsRequestModel
-import com.example.vkapp.data.mappers.PostMapperData
 import com.example.vkapp.domain.usecases.GetPostByIdUseCase
 import com.example.vkapp.domain.usecases.UpdatePostUseCase
 import com.example.vkapp.mappers.PostMapperPresentation
