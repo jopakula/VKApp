@@ -49,11 +49,13 @@ class DetailScreenViewModel(
     fun updatePostLikes(postId: Int, newLikes: Int, newDislikes: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
+                val currentViews = _post.value?.views ?: 0
                 val reactionsRequestModel = ReactionsRequestModel(reactions = ReactionsModel(likes = newLikes, dislikes = newDislikes))
                 val domainReactionsRequestModel = PostMapperPresentation.mapPresentationPostReactionsRequestToDomain(requestModel = reactionsRequestModel)
                 val updatedPost = updatePostUseCase.execute(postId = postId, reactionsRequestModel = domainReactionsRequestModel)
                 val updatedPresentationPost = PostMapperPresentation.mapDomainPostToPresentation(updatedPost)
-                _post.postValue(updatedPresentationPost)
+                val postWithRestoredViews = updatedPresentationPost.copy(views = currentViews)
+                _post.postValue(postWithRestoredViews)
             } catch (e: Exception) {
                 _errorMessage.postValue(e.message)
             }
@@ -71,6 +73,5 @@ class DetailScreenViewModel(
             updatePostLikes(postId = currentPost.id, newLikes = newLikes, newDislikes = currentPost.reactions.dislikes)
         }
     }
-
 }
 

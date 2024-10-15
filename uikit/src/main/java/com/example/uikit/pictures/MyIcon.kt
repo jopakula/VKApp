@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -49,7 +51,6 @@ fun MyIcon(
     iconColorBG: Color? = null,
     borderWidth: Dp? = null,
     borderColor: Color = Gray,
-    shadowElevation: Dp = 0.dp,
     contentScale: ContentScale = ContentScale.Crop,
     indication: Indication? = rememberRipple(),
     clickable: Boolean = true,
@@ -77,14 +78,10 @@ fun MyIcon(
     }
     Box(
         modifier = modifier
-            .shadow(
-                elevation = shadowElevation,
-                shape = RoundedCornerShape(rounding)
-            )
             .size(iconSize)
             .clip(RoundedCornerShape(rounding))
             .background(
-                color = iconColorBG?: Color.Transparent,
+                color = iconColorBG ?: Color.Transparent,
                 shape = RoundedCornerShape(rounding)
             )
             .then(clickModifier)
@@ -126,3 +123,14 @@ private fun MyIconPreview2() {
         iconColor = Color.White
     )
 }
+
+@Composable
+@Preview
+private fun MyIconPreview3() {
+    MyIcon(
+        icon = painterResource(id = R.drawable.ic_heart),
+        iconColor = Color.White
+    )
+}
+
+

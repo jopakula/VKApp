@@ -42,6 +42,7 @@ class AuthenticationScreenViewModel(
                 val domainRequest = UserMapperPresentation.mapPresentationAuthenticationRequestToDomain(request)
                 val domainUser = authenticateUserUseCase.execute(authenticationRequest = domainRequest)
                 saveUserUseCase.execute(domainUser)
+                getUser()
             } catch (e: Exception) {
                 _errorMessage.postValue(e.message)
             } finally {

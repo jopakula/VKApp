@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,7 +44,7 @@ fun MyCard(
             .fillMaxWidth()
             .shadow(
                 elevation = shadowElevation,
-                shape = RoundedCornerShape(roundingSize)
+                shape = RoundedCornerShape(roundingSize),
             )
             .clip(RoundedCornerShape(roundingSize))
             .clickable(
@@ -53,7 +54,7 @@ fun MyCard(
             )
             .background(
                 color = CardBG,
-                shape = RoundedCornerShape(roundingSize)
+                shape = RoundedCornerShape(roundingSize),
             )
             .padding(10.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -61,7 +62,7 @@ fun MyCard(
     ) {
         MyText(
             text = post.title,
-            textSize = 20.sp,
+            textSize = 22.sp,
             textWeight = FontWeight.Bold
         )
         MyText(
@@ -69,6 +70,28 @@ fun MyCard(
             textSize = 18.sp,
             textWeight = FontWeight.SemiBold
         )
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            post.tags.forEach { tag ->
+                Column(
+                    modifier = Modifier
+                        .background(
+                            Color.LightGray,
+                            shape = RoundedCornerShape(roundingSize)
+                        )
+                        .clip(RoundedCornerShape(roundingSize)),
+                ) {
+                    MyText(
+                        modifier = Modifier
+                            .padding(horizontal = 6.dp, vertical = 1.dp),
+                        text = tag,
+                        textSize = 14.sp,
+                        textWeight = FontWeight.SemiBold,
+                    )
+                }
+            }
+        }
     }
 }
 

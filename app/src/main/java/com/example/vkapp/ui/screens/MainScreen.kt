@@ -16,7 +16,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -24,6 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.uikit.card.MyCard
 import com.example.uikit.common.IconBG
 import com.example.uikit.common.LightGray
+import com.example.uikit.common.TopBarBg
 import com.example.uikit.common.White
 import com.example.uikit.pictures.MyIcon
 import com.example.vkapp.navigation.Screens
@@ -45,15 +45,15 @@ fun MainScreen(
         viewModel.getUser()
     }
 
-
-
     Column(
+        modifier = Modifier
+            .background(color = White),
         horizontalAlignment = Alignment.Start,
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(IconBG)
+                .background(TopBarBg)
                 .padding(start = 20.dp, top = 32.dp, end = 20.dp, bottom = 16.dp),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically,
@@ -61,7 +61,7 @@ fun MainScreen(
             MyIcon(
                 iconUrl = user?.image,
                 borderWidth = 0.dp,
-                iconColorBG = White,
+                iconColorBG = IconBG,
                 onClick = {
                     navigationController.navigate(Screens.Profile.screen)
                 }

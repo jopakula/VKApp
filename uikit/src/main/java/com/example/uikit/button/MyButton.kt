@@ -1,6 +1,7 @@
 package com.example.uikit.button
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
@@ -26,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.example.uikit.common.Black
 import com.example.uikit.common.ButtonEnableBG
 import com.example.uikit.common.ButtonEnterText
+import com.example.uikit.common.Gray
 import com.example.uikit.common.White
 import com.example.uikit.text.MyText
 
@@ -44,13 +47,34 @@ fun MyButton(
     textSize: TextUnit = 20.sp,
     textColor: Color = Black,
     textWeight: FontWeight = FontWeight.Normal,
+    borderWidth: Dp? = null,
+    borderColor: Color = Gray,
+    shadowElevation: Dp? = null,
     enabled: Boolean = true,
     onClick: () -> Unit = {},
 ) {
 
     val interactionSource = remember { MutableInteractionSource() }
+    val borderModifier = if (borderWidth != null) {
+        Modifier.border(
+            width = borderWidth,
+            color = borderColor,
+            shape = RoundedCornerShape(roundingSize)
+        )
+    } else {
+        Modifier
+    }
+    val shadowModifier = if (shadowElevation != null) {
+        Modifier.shadow(
+            elevation = shadowElevation,
+            shape = RoundedCornerShape(roundingSize)
+        )
+    } else {
+        Modifier
+    }
     Row(
         modifier = modifier
+            .then(shadowModifier)
             .fillMaxWidth()
             .height(buttonHeight)
             .clip(RoundedCornerShape(roundingSize))
@@ -66,7 +90,8 @@ fun MyButton(
             .background(
                 color = buttonBGColor,
                 shape = RoundedCornerShape(roundingSize)
-            ),
+            )
+            .then(borderModifier),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
     ) {
