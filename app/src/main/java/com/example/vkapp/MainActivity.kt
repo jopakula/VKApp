@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
             val navigationController = rememberNavController()
             Navigation(
                 navigationController = navigationController,
-                startDestination = Screens.Authentication.screen
+                startDestination = Screens.Splash.screen
             )
         }
     }

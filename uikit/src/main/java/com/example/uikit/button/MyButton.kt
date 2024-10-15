@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -26,10 +25,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.uikit.common.Black
-import com.example.uikit.common.ButtonEnableBG
+import com.example.uikit.common.Blue
 import com.example.uikit.common.ButtonEnterText
 import com.example.uikit.common.Gray
-import com.example.uikit.common.White
 import com.example.uikit.text.MyText
 
 /**
@@ -41,7 +39,7 @@ import com.example.uikit.text.MyText
 fun MyButton(
     modifier: Modifier = Modifier,
     buttonHeight: Dp = 56.dp,
-    buttonBGColor: Color = ButtonEnableBG,
+    buttonBGColor: Color = Blue,
     buttonText: String = ButtonEnterText,
     roundingSize: Dp = 16.dp,
     textSize: TextUnit = 20.sp,

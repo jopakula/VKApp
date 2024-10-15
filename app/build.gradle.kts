@@ -51,6 +51,9 @@ android {
 
 dependencies {
 
+    // lottie
+    implementation(libs.lottie)
+
     // koin
     implementation(libs.koin.core)
     implementation(libs.koin.androidx.compose)
